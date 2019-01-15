@@ -7,6 +7,7 @@ const Enemy = function(x, y, speed) {
     this.boundary = this.move * 5;
     this.resetPosition = -this.move;
     this.speed = speed;
+
 };
 
 //sets boundaries and speed of enemies
@@ -34,57 +35,62 @@ class PlayerOne {
         }
         //renders image/sprite and places it on the startX and StartY Axis   
     render() {
-        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+            ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+        }
+        //WORKING ON THIS////////////////////////
+    update() {
+        //checks for collision
+        for (let enemy of allEnemies) {
+            if (this.y === enemy.y) {
+                console.log('same row');
+            }
+            //console.log(this.y, enemy.y);
+        }
     }
 
     //Keyboard input: Uses only the allowed keys(up,down,right and left arrow keys) to move player. 
     //If statements prevent player from moving outside of boundaries.
     handleInput(input) {
-            switch (input) {
-                case 'left':
-                    if (this.x > 0) {
-                        this.x -= this.goLeftRight;
-                    }
-                    break;
-                case 'up':
-                    if (this.y > 0) {
-                        this.y -= this.goUpDown;
-                    }
-                    break;
-                case 'right':
-                    if (this.x < this.goLeftRight * 4) {
-                        this.x += this.goLeftRight;
-                    }
-                    break;
-                case 'down':
-                    if (this.y < this.goUpDown * 4) {
-                        this.y += this.goUpDown;
-                    }
-                    break;
-            }
+        switch (input) {
+            case 'left':
+                if (this.x > 0) {
+                    this.x -= this.goLeftRight;
+                }
+                break;
+            case 'up':
+                if (this.y > 0) {
+                    this.y -= this.goUpDown;
+                }
+                break;
+            case 'right':
+                if (this.x < this.goLeftRight * 4) {
+                    this.x += this.goLeftRight;
+                }
+                break;
+            case 'down':
+                if (this.y < this.goUpDown * 4) {
+                    this.y += this.goUpDown;
+                }
+                break;
         }
-        //TODO:
-        //Update Possition
-        //check collision here
-        //did player x/y collide with enemy?
-        //check win here
-        //did player x/y reach final tile?
-        //Reset player
-        //set x and y to starting possition
-
+    }
 }
+// Place the player object in a variable called player
 const player = new PlayerOne();
 const firstBug = new Enemy(-100, 160, 200);
 const secondBug = new Enemy(-100, 80, 300);
 const thirdBug = new Enemy(-100, 0, 150);
 const fourthBug = new Enemy(-100, 0, 200);
+//Place all enemy objects in an array called allEnemies
 const allEnemies = [];
 allEnemies.push(firstBug, secondBug, thirdBug, fourthBug);
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
 
+//did player x/y collide with enemy?
+//check win here
+//did player x/y reach final tile?
+//Reset player
+//set x and y to starting possition
 
 
 // This listens for key presses and sends the keys to your
