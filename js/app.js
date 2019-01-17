@@ -1,7 +1,7 @@
 // Enemies our player must avoid
 const Enemy = function(x, y, speed) {
     this.x = x;
-    this.y = y + 60;
+    this.y = y;
     this.sprite = 'images/enemy-bug.png';
     this.move = 100;
     this.boundary = this.move * 5;
@@ -28,23 +28,23 @@ Enemy.prototype.render = function() {
 class PlayerOne {
     constructor() {
             this.x = 200;
-            this.y = 380;
+            this.y = 390;
             this.goLeftRight = 100;
-            this.goUpDown = 83;
+            this.goUpDown = 80;
             this.sprite = 'images/char-cat-girl.png';
         }
         //renders image/sprite and places it on the startX and StartY Axis   
     render() {
-            ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-        }
-        //WORKING ON THIS////////////////////////
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+
+    //WORKING ON THIS////////////////////////
     update() {
         //checks for collision
         for (let enemy of allEnemies) {
-            if (this.y === enemy.y) {
-                console.log('same row');
+            if (this.y === enemy.y && this.x === enemy.x) {
+                console.log('match');
             }
-            //console.log(this.y, enemy.y);
         }
     }
 
@@ -77,14 +77,12 @@ class PlayerOne {
 }
 // Place the player object in a variable called player
 const player = new PlayerOne();
-const firstBug = new Enemy(-100, 160, 200);
-const secondBug = new Enemy(-100, 80, 300);
-const thirdBug = new Enemy(-100, 0, 150);
-const fourthBug = new Enemy(-100, 0, 200);
+const firstBug = new Enemy(-100, 150, 150);
+const secondBug = new Enemy(-100, 230, 250);
+const thirdBug = new Enemy(-100, 70, 200);
 //Place all enemy objects in an array called allEnemies
 const allEnemies = [];
-allEnemies.push(firstBug, secondBug, thirdBug, fourthBug);
-
+allEnemies.push(firstBug, secondBug, thirdBug);
 
 //did player x/y collide with enemy?
 //check win here
