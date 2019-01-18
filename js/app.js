@@ -38,15 +38,29 @@ class PlayerOne {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 
-    //WORKING ON THIS////////////////////////
     update() {
-        //checks for collision
-        for (let enemy of allEnemies) {
-            if (this.y === enemy.y && this.x === enemy.x) {
-                console.log('match');
+            //checks for collision
+            for (let enemy of allEnemies) {
+                if (this.y === enemy.y && (enemy.x + enemy.move / 2 > this.x && enemy.x < this.x + this.goLeftRight / 2)) {
+                    this.reset();
+                }
             }
+            console.log(this.x);
+        }
+        //WORKING ON THIS////////////////////////
+    winner() {
+        while (this.x >= 0 && (this.x <= 400)) {
+            console.log("winner");
+
         }
     }
+
+    reset() {
+        this.x = 200;
+        this.y = 390;
+    }
+
+
 
     //Keyboard input: Uses only the allowed keys(up,down,right and left arrow keys) to move player. 
     //If statements prevent player from moving outside of boundaries.
