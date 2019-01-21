@@ -38,29 +38,25 @@ class PlayerOne {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 
-    update() {
-            //checks for collision
-            for (let enemy of allEnemies) {
-                if (this.y === enemy.y && (enemy.x + enemy.move / 2 > this.x && enemy.x < this.x + this.goLeftRight / 2)) {
-                    this.reset();
-                }
-            }
-            console.log(this.x);
-        }
-        //WORKING ON THIS////////////////////////
-    winner() {
-        while (this.x >= 0 && (this.x <= 400)) {
-            console.log("winner");
+    //checks for player collision with bugs by comparing the x & y possitions of both the enemy and player
 
+    update() {
+        for (let enemy of allEnemies) {
+            if (this.y === enemy.y && (enemy.x + enemy.move / 2 > this.x && enemy.x < this.x + this.goLeftRight / 2)) {
+                this.reset();
+                //checks is player has reached the water
+            } else if (this.y === -10) {
+                window.alert("You Won!");
+                this.reset();
+            }
         }
     }
 
+    //resets the player possition
     reset() {
         this.x = 200;
         this.y = 390;
     }
-
-
 
     //Keyboard input: Uses only the allowed keys(up,down,right and left arrow keys) to move player. 
     //If statements prevent player from moving outside of boundaries.
@@ -91,22 +87,18 @@ class PlayerOne {
 }
 // Place the player object in a variable called player
 const player = new PlayerOne();
-const firstBug = new Enemy(-100, 150, 150);
-const secondBug = new Enemy(-100, 230, 250);
-const thirdBug = new Enemy(-100, 70, 200);
+//creates a bug object with provided possition and speed
+const bug1 = new Enemy(-100, 230, 150);
+const bug2 = new Enemy(-100, 150, 300);
+const bug3 = new Enemy(-100, 150, 200);
+const bug4 = new Enemy(-100, 70, 225);
+
 //Place all enemy objects in an array called allEnemies
 const allEnemies = [];
-allEnemies.push(firstBug, secondBug, thirdBug);
-
-//did player x/y collide with enemy?
-//check win here
-//did player x/y reach final tile?
-//Reset player
-//set x and y to starting possition
-
+allEnemies.push(bug1, bug2, bug3, bug4);
 
 // This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// Player.handleInput() method.
 document.addEventListener('keyup', function(e) {
     const allowedKeys = {
         37: 'left',
