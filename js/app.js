@@ -42,7 +42,7 @@ class PlayerOne {
 
     update() {
         for (let enemy of allEnemies) {
-            if (this.y === enemy.y && (enemy.x + enemy.move / 2 > this.x && enemy.x < this.x + this.goLeftRight / 2)) {
+            if (this.y === enemy.y && (enemy.x + enemy.move / 1.3 > this.x && enemy.x < this.x + this.goLeftRight / 1.3)) {
                 this.reset();
                 //checks is player has reached the water
             } else if (this.y === -10) {
